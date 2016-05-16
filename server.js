@@ -20,8 +20,10 @@ app.use(cors());
 // Controllers
 
 var DirectoryController = require('./api/controllers/directory_controller');
+var HelpDeskController = require('./api/controllers/helpdesk_controller');
 
 //Endpoints
+// Directory
 
 app.get('/api/people', DirectoryController.findAll);
 
@@ -33,6 +35,20 @@ app.put('/api/people/:id', DirectoryController.update);
 
 app.delete('/api/people/:id', DirectoryController.destroy);
 
+// Help Desk
+
+app.get('/api/helpDesk', HelpDeskController.findAll);
+
+app.get('/api/helpDesk/:id', HelpDeskController.findOne);
+
+app.post('/api/helpDesk', HelpDeskController.create);
+
+app.put('/api/helpDesk/:id', HelpDeskController.update);
+
+app.delete('/api/helpDesk/:id', HelpDeskController.destroy);
+
+
+
 
 
 // // // MongoDB
@@ -42,7 +58,7 @@ mongoose.connect(mongoUri);
 
 
 // // Start Database
-var db = mongojs('weaveConnect', ['people']);
+var db = mongojs('weaveConnect', ['people', 'helpDesk']);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
